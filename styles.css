@@ -1,0 +1,36 @@
+body{ background-color:black;
+      background-image: url('http://ppcorn.com/us/wp-content/uploads/sites/14/2015/12/SpongeBob-ppcorn.jpg');
+      background-repeat:repeat;
+      
+ }
+#paragraph1{text-align:center;}
+.main{
+font-family:"times new roman";
+font-size:30px;
+padding:10;
+width:100%;
+
+}
+li a{
+display:inline;
+}
+a:visited{color:red;}
+a:hover{color:green;
+text-decoration: underline;
+}
+
+
+table{width:80%}
+img{
+position: center ,center;
+text-align:center;
+}
+table{width:500%;}
+.image:hover .img__description {
+  visibility: visible;
+  opacity: 1;
+}
+footer
+{
+  
+}

@@ -1,7 +1,8 @@
+
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Users</title>
+<title>UserAccount</title>
 <link
 rel="stylesheet"
 type="text/css"
@@ -17,60 +18,86 @@ href="ycsms.css"/>
 
 <hr style="color:green">
 </div>
-
     </head>
     <body>
+<div>    
          <div class="float-left-area">
 <div class="inner-left">
-       <link href= "Prr.css" type="text/css" rel="stylesheet">
-<table class="table">
+       
+<fieldset>
+<legend >My Profile </legend>
+  <div class="float-left-area">
+</div><br>
 
+<link href= "Prr.css" type="text/css" rel="stylesheet">
 <?php
+session_start();
 
 include"connection.php";
-
-$result= mysqli_query($db," SELECT * FROM supervisors");
-
+$uname = $_SESSION['login_user'];
 
 
-while($row= mysqli_fetch_array ($result))
-{      
-
- echo "<tr>";
-  echo '<td><img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" style="width:150px;height:130px"/></td>';
- echo "<th>".$row['Firstname']. "</td>";
- echo "<th>".$row['Lastname']. "</td>";
- echo "<th>".$row['IDnumber']. "</td>";
- echo "<th>".$row['Gender']. "</td>";
- echo "<th>".$row['Contact']. "</td>";
- echo "<th>".$row['Email']. "</td>";
- echo "<th>".$row['Account']. "</td>";
- echo "<th>".$row['Religion']. "</td>";
- echo "<th>".$row['Residence']. "</td>";
- echo "<th>".$row['Nextofkin']. "</td>";
- echo "<th>".$row['NextofkinID']. "</td>";
- echo "</tr>";
-};
-
-echo "</table>";//display the tale
-
-mysqli_close($db);//close database
+if (isset($_SESSION['login_user'])) {
 
 
-?></div>
+
+    // remove the key so we don't keep outputting the message
+   
+$id=($_SESSION['login_user']);
+
+$run = mysqli_query($db,"Select Firstname,Lastname,IDnumber, Contact, Email, Account from users Where Firstname = '$id'");
+
+    $row = mysqli_fetch_array($run, MYSQLI_BOTH); {}
+
+
+
+    $firstname = $row[0]; 
+
+    $lastname = $row[1];
+    $ID = $row[2];
+      $contact = $row[3];
+        $email = $row[4];
+          $account = $row[5];
+
+echo"<div style='text-align:left'>";
+   echo "<strong>ID number: ". $ID."</strong><br><br>";
+       echo "<strong>Surname: ". $lastname."</strong><br><br>";
+
+   echo "<strong>First Name: ". $firstname."</strong><br><br>";
+
+   echo "<strong>Contact ". $contact."</strong><br><br>";
+   echo "<strong>Email Address: ". $email."</strong><br><br>";
+   echo "<strong>Account Number: ". $account."</strong><br>";
+echo"</div>";
+
+    
+
+}
+else
+{
+
+echo('wrong');
+}?>
+
+</fieldset>
+
+
+</div>
 </div>
 <div class="float-right-area" >
 <div class="inner-right" style= "font-family:Baskerville Old Face;
 font-size:30px;">
-<a href= "bid.php" > Book a Work slot </a><br>
-<a href= "myreport.php" > My Report </a> <br>
+<a href= "myreport.php" > View my report </a><br>
+<a href= "bid.php" > book a work slot </a> <br>
 <a href= "logout.php"> Logout </a><br>
-
+</div>
 
     </div>
     </div>
     
-
 </body>
 
     </html>
+
+
+

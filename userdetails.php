@@ -1,14 +1,15 @@
+<link href= "tt.css" type="text/css" rel="stylesheet">
 <?php
 include 'connection.php';
 
 
-$result=  mysqli_query ($db,"SELECT* FROM users");
 
-echo "<table border='1'>
+$result=  mysqli_query ($db,"SELECT* FROM users");
+echo "<table>
 <tr>
-<th class="c1"> Image</th>
-<th class="c2"> Firstname</th>
-<th class= "c3"> Last Name </th>
+<th> Image</th>
+<th> Firstname</th>
+<th> Last Name </th>
 <th> ID Number </th>
 <th> Contact </th>
 <th> Email</th>
@@ -23,7 +24,7 @@ while ($row= mysqli_fetch_array($result))//fetch data
 {      
 
  echo "<tr>";
- echo "<td>".$row['Image']. "</td>"; 
+echo '<td><img src="data:image/jpeg;base64,'.base64_encode($row['Image']).'" style="width:150px;height:130px"/></td>';
  echo "<td>".$row['Firstname']. "</td>";
  echo "<td>".$row['Lastname']. "</td>";
  echo "<td>".$row['IDnumber']. "</td>";

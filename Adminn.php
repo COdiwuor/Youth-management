@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Administrator</title>
+<title>Manager</title>
 <link
 rel="stylesheet"
 type="text/css"
@@ -19,48 +19,72 @@ href="ycsms.css"/>
 </div>
     </head>
     <body>
+<div>    
          <div class="float-left-area">
 <div class="inner-left">
        
 <fieldset>
-<legend >My Profile </legend>
+<legend >Administrator </legend>
   <div class="float-left-area">
 
 </div><br>
 
 <link href= "Prr.css" type="text/css" rel="stylesheet">
-<table class="table">
+
 <?php
+session_start();
+
 
 include"connection.php";
-
-$result= mysqli_query($db," SELECT * FROM supervisors");
-
+$uname = $_SESSION['login_user'];
 
 
-while($row= mysqli_fetch_array ($result))
-{      
+if (isset($_SESSION['login_user'])) {
 
- echo "<tr>";
-  echo '<th> Image: <br> <img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" style="width:150px;height:130px"/></td>';
- echo "<th class="c1"> First Name: ".$row['Firstname']. "</td>";
- echo "<th class="c2"> LastName: ".$row['Lastname']. "</td>";
- echo "<th class="c3"> ID: ".$row['IDnumber']. "</td>";
- echo "<th class="c4"> Gender: ".$row['Gender']. "</td>";
- echo "<th> Contact: ".$row['Contact']. "</td>";
- echo "<th> Email: ".$row['Email']. "</td>";
- echo "<th> Account: ".$row['Account']. "</td>";
- echo "<th> Religion: ".$row['Religion']. "</td>";
- echo "<th> Residence: ".$row['Residence']. "</td>";
- echo "<th> NextofKin: ".$row['Nextofkin']. "</td>";
- echo "<th> NextofKin ID: ".$row['NextofkinID']. "</td>";
- echo "</tr>";
-};
 
-echo "</table>";//display the tale
 
-mysqli_close($db);//close database
-?>
+    // remove the key so we don't keep outputting the message
+   
+$id=($_SESSION['login_user']);
+
+$run = mysqli_query($db,"Select Firstname,Lastname,IDnumber, Religion,Contact, Email, Account from administrator Where Firstname = '$id'");
+
+    $row = mysqli_fetch_array($run, MYSQLI_BOTH); {}
+
+
+
+    $firstname = $row[0]; 
+
+    $lastname = $row[1];
+    $ID =       $row[2];
+    $religion = $row[3];
+    $contact =  $row[4];
+    $email =    $row[5];
+    $account =  $row[6];
+          
+
+echo"<div style='text-align:left'>";
+echo '<td><img src="data:image/jpeg;base64,'.base64_encode($row['Image']).'" style="width:150px;height:130px"/></td>';
+   echo "<strong>ID number: ". $ID."</strong><br><br>";
+       echo "<strong>Surname: ". $lastname."</strong><br><br>";
+
+   echo "<strong>First Name: ". $firstname."</strong><br><br>";
+
+   echo "<strong>Contact ". $contact."</strong><br><br>";
+   echo "<strong>Email Address: ". $email."</strong><br><br>";
+   echo "<strong>Account Number: ". $account."</strong><br><br>";
+    echo "<strong>Religion:  ". $religion."</strong><br><br>";
+echo"</div>";
+
+    
+
+}
+else
+{
+
+echo('wrong');
+}?>
+
 </fieldset>
 
 
@@ -73,12 +97,13 @@ font-size:30px;">
 <a href= "workstation.php" > workstations </a> <br>
 <a href= "supervisor.php"  > supervisors </a><br>
 <a href= "reports.html" > reports </a><br>
-<a href= "suggestions.html"> Suggestions </a><br>
+<a href= "viewsuggestions.php"> Suggestions </a><br>
 <a href= "logout.php"> Logout </a><br>
-
+</div>
 
     </div>
     </div>
+    
 </body>
 
     </html>
