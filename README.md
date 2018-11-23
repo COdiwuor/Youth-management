@@ -2,7 +2,7 @@
 A youth management project 
 #### Installation 
 #### Prerequisites
-Administration module
+Administration module,
 User module
 
 #### Contributors
